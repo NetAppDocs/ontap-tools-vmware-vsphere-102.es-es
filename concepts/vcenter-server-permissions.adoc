@@ -1,0 +1,75 @@
+---
+permalink: concepts/vcenter-server-permissions.html 
+sidebar: sidebar 
+keywords:  
+summary: El servidor de vCenter reconoce permisos, no privilegios. Cada permiso de vCenter Server consta de tres componentes. 
+---
+= Componentes de permisos de vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El servidor de vCenter reconoce permisos, no privilegios. Cada permiso de vCenter Server consta de tres componentes.
+
+El servidor vCenter tiene los siguientes componentes:
+
+* Uno o más privilegios (el rol)
++
+Los privilegios definen las tareas que un usuario puede realizar.
+
+* Un objeto de vSphere
++
+El objeto es el destino de las tareas.
+
+* Un usuario o grupo
++
+El usuario o grupo define quién puede realizar la tarea.
+
+
+
+
+NOTE: En este diagrama, los cuadros grises indican los componentes que existen en vCenter Server y los recuadros blancos indican componentes que existen en el sistema operativo donde se ejecuta vCenter Server.
+
+image:../media/permission-updated-graphic.gif["ilustración de componentes de permiso"]
+
+
+
+== Privilegios
+
+Existen dos tipos de privilegios asociados con las herramientas de ONTAP para VMware vSphere:
+
+* Privilegios nativos de vCenter Server
++
+Estos privilegios vienen con vCenter Server.
+
+* Privilegios específicos de herramientas de ONTAP
++
+Estos privilegios se definen para tareas de ONTAP específicas para tareas de VMware vSphere. Son exclusivas de las herramientas de ONTAP para VMware vSphere.
+
+
+
+Las herramientas de ONTAP para las tareas de VMware vSphere requieren privilegios específicos para las herramientas de ONTAP y privilegios nativos de vCenter Server. Estos privilegios constituyen el "'rol'" del usuario. Un permiso puede tener varios privilegios. Estos privilegios corresponden a un usuario que ha iniciado sesión en vCenter Server.
+
+
+NOTE: Para simplificar el uso del control de acceso basado en roles de vCenter Server, las herramientas de ONTAP para VMware vSphere proporcionan varios roles estándar que contienen todos los privilegios nativos y específicos de las herramientas de ONTAP necesarios para ejecutar tareas de ONTAP para VMware vSphere.
+
+Si cambia los privilegios dentro de un permiso, el usuario asociado a ese permiso debe cerrar sesión y, a continuación, iniciar sesión para activar el permiso actualizado.
+
+
+
+== Objetos de vSphere
+
+Los permisos se asocian con objetos de vSphere, como vCenter Server, hosts ESXi, máquinas virtuales, almacenes de datos, centros de datos, y carpetas. Puede asignar permisos a cualquier objeto de vSphere. Según el permiso que se asigna a un objeto de vSphere, vCenter Server determina quién puede ejecutar qué tareas en ese objeto. En el caso de las herramientas de ONTAP para tareas específicas de VMware vSphere, los permisos se asignan y validan solo en el nivel de carpeta raíz (vCenter Server) y no en ninguna otra entidad. Excepto para la operación del plugin VAAI, donde los permisos se validan en el host ESXi afectado.
+
+
+
+== Usuarios y grupos
+
+Es posible usar Active Directory (o la máquina local de vCenter Server) para configurar usuarios y grupos de usuarios. Luego, puede utilizar permisos de vCenter Server para otorgar acceso a estos usuarios o grupos para permitirles ejecutar herramientas de ONTAP específicas para tareas de VMware vSphere.
+
+
+NOTE: Estos permisos de vCenter Server se aplican a las herramientas de ONTAP para usuarios de VMware vSphere vCenter, no a las herramientas de ONTAP para administradores de VMware vSphere. De forma predeterminada, las herramientas de ONTAP para administradores de VMware vSphere tienen acceso completo al producto y no requieren permisos que se les asignen.
+
+Los usuarios y grupos no tienen roles asignados. Estos obtienen acceso a un rol mediante el permiso de vCenter Server.

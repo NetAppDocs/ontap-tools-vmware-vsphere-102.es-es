@@ -1,0 +1,41 @@
+---
+permalink: concepts/ontap-roles.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Puede configurar varios roles de ONTAP recomendados para trabajar con herramientas de ONTAP para VMware vSphere y el control de acceso basado en roles \(RBAC\). Estos roles contienen los privilegios de ONTAP que se requieren para ejecutar las operaciones de almacenamiento requeridas que ejecutan las herramientas ONTAP para tareas de VMware vSphere.' 
+---
+= Roles de ONTAP recomendados para herramientas de ONTAP para VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es posible configurar varios roles de ONTAP recomendados para trabajar con las herramientas de ONTAP para VMware vSphere y el control de acceso basado en roles (RBAC). Estos roles contienen los privilegios de ONTAP necesarios para realizar las operaciones de almacenamiento que ejecutan las herramientas ONTAP para tareas de VMware vSphere.
+
+Para crear roles de usuario nuevos, debe iniciar sesión como administrador de los sistemas de almacenamiento que ejecutan ONTAP. Se pueden crear roles de ONTAP con ONTAP System Manager 9.8P1 o posterior.
+
+Cada rol de ONTAP tiene una pareja asociada de nombre de usuario y contraseña, que constituyen las credenciales del rol. Si no inicia sesión con estas credenciales, no podrá acceder a las operaciones de almacenamiento que están asociadas con el rol.
+
+Como medida de seguridad, las herramientas de ONTAP para las funciones de ONTAP específicas de VMware vSphere se ordenan jerárquicamente. Esto significa que el primer rol es el más restrictivo y solo tiene los privilegios asociados al conjunto más básico de herramientas ONTAP para operaciones de almacenamiento de VMware vSphere. El siguiente rol incluye sus propios privilegios y todos los privilegios asociados con el rol anterior. Cada rol adicional es menos restrictivo con respecto a las operaciones de almacenamiento admitidas.
+
+A continuación se muestran algunos de los roles de control de acceso basado en roles recomendados de ONTAP cuando se utilizan herramientas de ONTAP para VMware vSphere. Después de crear estos roles, puede asignarlos a usuarios que deban realizar tareas relacionadas con el almacenamiento, como el aprovisionamiento de máquinas virtuales.
+
+|===
+
+
+| *Rol* | *privilegios* 
+
+
+| Detección | Este rol le permite añadir sistemas de almacenamiento. 
+
+
+| Cree almacenamiento | Este rol le permite crear almacenamiento. Este rol también incluye todos los privilegios asociados con el rol de detección. 
+
+
+| Modificar almacenamiento | Este rol permite modificar almacenamiento. Este rol también incluye todos los privilegios asociados con el rol de detección y el rol de creación de almacenamiento. 
+
+
+| Destruya el almacenamiento | Este rol le permite destruir almacenamiento. Este rol también incluye todos los privilegios asociados con el rol Discovery, el rol Create Storage y el rol Modify Storage. 
+|===
+Si utiliza herramientas de ONTAP para VMware vSphere, también debe configurar un rol de gestión basada en políticas (PBM). Este rol le permite gestionar el almacenamiento mediante políticas de almacenamiento. Esta función requiere que usted también establezca el papel de «recuperación».

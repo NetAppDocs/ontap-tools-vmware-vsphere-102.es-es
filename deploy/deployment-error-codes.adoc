@@ -1,0 +1,146 @@
+---
+permalink: deploy/deployment-error-codes.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: En esta página se describen los códigos de error para las operaciones de implementación, reinicio y recuperación de las herramientas de ONTAP para el sistema VMware vSphere. 
+---
+= Códigos de error de despliegue
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es posible que aparezcan códigos de error durante las herramientas de ONTAP para operaciones de implementación, reinicio y recuperación de VMware vSphere. Los códigos de error tienen una longitud de cinco dígitos, donde los dos primeros dígitos representan el script que encontró el problema, y los tres últimos dígitos representan el flujo de trabajo específico dentro de ese script.
+
+Todos los registros de errores se registran en el archivo ansible-perl-errors.log para facilitar el seguimiento y la resolución de los problemas. Este archivo de registro contiene el código de error y la tarea de Ansible con errores.
+
+
+NOTE: Los códigos de error proporcionados en esta página son sólo de referencia. Póngase en contacto con el equipo de soporte si el error persiste o si no se menciona ninguna solución.
+
+En la siguiente tabla se enumeran los códigos de error y los nombres de archivo correspondientes.
+
+|===
+
+
+| *Código de error* | *Nombre del script* 
+
+
+| 00 | firstboot-network-config.pl, despliegue del modo 
+
+
+| 01 | firstboot-network-config.pl, actualización del modo 
+
+
+| 02 | firstboot-inputs-validation.pl 
+
+
+| 03 | firstboot-deploy-otv-ng.pl, puesta en marcha, ha 
+
+
+| 04 | firstboot-deploy-otv-ng.pl tb, puesta en marcha, no ha 
+
+
+| 05 | firstboot-deploy-otv-ng.pl, reiniciar 
+
+
+| 06 | firstboot-deploy-otv-ng.pl, actualización, ha 
+
+
+| 07 | firstboot-deploy-otv-ng.pl, actualización, no ha 
+
+
+| 08 | firstboot-otv-recovery.pl 
+|===
+Los últimos tres dígitos del código de error indican el error de flujo de trabajo específico dentro del script:
+
+|===
+
+
+| *Código de error de implementación* | *Flujo de trabajo* | *Resolución* 
+
+
+| 050 | Fallo al generar la clave SSH | Reiniciar la máquina virtual primaria (VM). 
+
+
+| 051 | No se pudieron implementar máquinas virtuales secundarias | * Si se crean la segunda y la tercera VM, asegúrese de que haya suficientes recursos de CPU/memoria disponibles antes de encender las VM secundarias y reiniciar la VM primaria. * Si la segunda y la tercera VM están en la tarea de plantilla Implementar herramientas de ONTAP para VMware vSphere, espere a que se complete la tarea, encienda las VM y reinicie la VM principal. * Redesplegar. 
+
+
+| 052 | Fallo al copiar claves SSH | Reiniciar la máquina virtual principal. 
+
+
+| 053 | Error al instalar RKE2 | Ejecute lo siguiente y reinicie la máquina virtual principal o Redeploy: Sudo rke2-killall.sh (todas las máquinas virtuales) sudo rke2-uninstall.sh (todas las máquinas virtuales). 
+
+
+| 054 | Fallo al definir kubeconfig | Volver a desplegar 
+
+
+| 055 | Fallo al desplegar el registro | Si el pod del registro está presente, espere a que el pod esté listo y, a continuación, reinicie la VM principal o vuelva a implementarla. 
+
+
+| 056 | Se produjo un error en el inicio de sesión ISCSI | Asegúrese de que el protocolo iSCSI esté habilitado y configurado correctamente en ONTAP. Asegúrese de que la dirección IP de LIF de datos de iSCSI proporcionada sea correcta y esté en línea. Reinicie el equipo virtual si los puntos anteriores son correctos. De lo contrario, vuelva a desplegar. 
+
+
+| 057 | Ha fallado la puesta en marcha de Trident | *Asegúrese de que las direcciones IP de LIF de gestión y LIF de datos sean accesibles desde VM. *Asegúrese de que el protocolo NFS o iSCSI está habilitado y configurado correctamente en ONTAP. *Asegúrese de que la dirección IP NFS/iSCSI Data LIF proporcionada sea correcta y esté en línea. *Asegúrese de que el nombre de usuario y la contraseña proporcionados sean correctos y que el usuario tenga privilegios suficientes para crear volumen. * Reinicie si todos los puntos anteriores son correctos. De lo contrario, vuelva a desplegar. 
+
+
+| 058 | Se produjo un error en la importación de Trident | *Asegúrese de que el nombre de usuario y la contraseña proporcionados sean correctos y que el usuario tenga privilegios suficientes para crear, montar, clonar y eliminar volúmenes. * Asegúrese de que se utilice la misma configuración de ONTAP para recuperar la configuración y volver a intentar la recuperación. 
+
+
+| 059 | El despliegue de KubeVip ha fallado | Asegúrese de que la dirección IP virtual para el plano de control de Kubernetes y la dirección IP del balanceador de carga proporcionada durante la implementación pertenezcan a la misma VLAN y sean direcciones IP libres. Reinicie si todos los puntos anteriores son correctos. De lo contrario, vuelva a desplegar. 
+
+
+| 060 | Fallo en el despliegue del operador | Reinicie 
+
+
+| 061 | Fallo en el despliegue de servicios | Realice la depuración básica de Kubernetes como los pods GET, GET rs, GET svc, etc. en el espacio de nombres ntv-SYSTEM para obtener más detalles y registros de errores en /var/log/ansible-perl-errors.log y /var/log/ansible-run.log y vuelva a desplegar. 
+
+
+| 062 | Se produjo un error en la implementación del proveedor de VASA y de SRA | Consulte los registros de errores en /var/log/ansible-perl-errors.log para obtener más detalles y volver a desplegar. 
+
+
+| 064 | error de verificación version.xml | Volver a desplegar 
+
+
+| 065 | No se puede acceder a la URL de la página de Swagger | Volver a desplegar 
+
+
+| 066 | Fallo en los pasos posteriores al despliegue | - 
+
+
+| 088 | Fallo al configurar la rotación de log para el diario | Reiniciar la máquina virtual principal. 
+
+
+| 089 | Fallo al cambiar la propiedad del archivo de configuración de rotación de registro de resumen | Reiniciar la máquina virtual principal. 
+|===
+|===
+
+
+| *Reiniciar código de error* | *Flujo de trabajo* 
+
+
+| 067 | Se ha agotado el tiempo de espera de rke2-server 
+
+
+| 101 | Fallo al restablecer la contraseña de usuario de mantenimiento/consola 
+
+
+| 102 | Error al eliminar el archivo de contraseñas durante el restablecimiento de la contraseña de usuario de Maint/Console 
+
+
+| 103 | Error al actualizar la nueva contraseña de usuario de mantenimiento/consola en el almacén 
+|===
+|===
+
+
+| *Código de error de recuperación* | *Flujo de trabajo* | *Resolución* 
+
+
+| 104 | Se han producido errores en los pasos posteriores a la recuperación. | - 
+
+
+| 105 | Se produjo un error en la copia de contenido en el volumen de recuperación. | - 
+
+
+| 106 | No se pudo montar el volumen de recuperación. | * Asegúrese de que se utiliza la misma SVM y que el volumen de recuperación está presente en la SVM. (El nombre del volumen de recuperación comienza con otvng_Trident_recovery) * Asegúrese de que se puede acceder a las direcciones IP de LIF de gestión y LIF de datos desde el equipo virtual. * Asegúrese de que el protocolo NFS/iSCSI está habilitado y configurado correctamente en ONTAP. * Asegúrese de que la dirección IP NFS/iSCSI DAT LIF proporcionada sea correcta y en línea. * Asegúrese de que el nombre de usuario, contraseña, protocolo proporcionado son correctos y el usuario tiene suficientes privilegios para crear, montar, clonar, eliminar. * Reintentar la recuperación 
+|===

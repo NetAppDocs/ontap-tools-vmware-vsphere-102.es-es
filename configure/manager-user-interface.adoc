@@ -1,0 +1,25 @@
+---
+permalink: configure/manager-user-interface.html 
+sidebar: sidebar 
+keywords: ontap tools manager, managerui 
+summary: El administrador de herramientas de ONTAP proporciona un mayor control y potencia a las herramientas de ONTAP para administrador de VMware vSphere, lo que ayuda en la gestión general de los dispositivos, los inquilinos y los back-ends de almacenamiento. 
+---
+= Interfaz de usuario del gestor de herramientas de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las herramientas de ONTAP para VMware vSphere son un sistema multi-tenant que puede gestionar varias instancias de vCenter Server. El administrador de herramientas de ONTAP proporciona un mayor control a las herramientas de ONTAP para el administrador de VMware vSphere a través de las instancias gestionadas de vCenter Server y los back-ends de almacenamiento incorporados.
+
+El Gestor de herramientas de ONTAP ayuda en:
+
+* Gestión de instancias de vCenter Server: Añada y gestione instancias de vCenter Server a herramientas de ONTAP.
+* Gestión del back-end de almacenamiento: Añada y gestione clústeres de almacenamiento de ONTAP a las herramientas de ONTAP para VMware vSphere y asígnelos a instancias integradas de vCenter Server a nivel global.
+* Descargas del paquete de registro: Recoja archivos de registro para las herramientas de ONTAP para VMware vSphere.
+* Gestión de certificados: Cambie el certificado autofirmado a un certificado de CA personalizado y renueve o actualice todos los certificados del proveedor VASA.
+* Gestión de contraseñas: Restablece la contraseña de la aplicación OVA para el usuario.
+
+
+Para acceder al Administrador de herramientas de ONTAP, `\https://loadBalanceIP:8443/virtualization/ui/` inicie sesión desde el explorador e inicie sesión con las herramientas de ONTAP para las credenciales de administrador de VMware vSphere que proporcionó durante la implementación.

@@ -1,0 +1,59 @@
+---
+permalink: manage/storage-view-datastore.html 
+sidebar: sidebar 
+keywords: Remove vVol datastore 
+summary: La vista de almacenamiento de ONTAP en la pestaña de configuración de una herramienta de ONTAP para VMware vSphere proporciona datos relacionados con el almacén de datos y su volumen. 
+---
+= Vistas de almacenamiento ONTAP para almacenes de datos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La vista de almacenamiento ONTAP en la pestaña de configuración de herramientas de ONTAP para VMware vSphere proporciona datos relacionados con los almacenes de datos y su volumen. Esta vista proporciona la vista lateral del almacenamiento del almacén de datos.
+
+
+
+== Vistas de almacenamiento ONTAP para almacenes de datos NFS
+
+.Pasos
+. Desde vSphere Client, desplácese hasta el almacén de datos de NFS.
+. Haga clic en la pestaña *Configure* en el panel derecho.
+. Selecciona *Herramientas de NetApp ONTAP* > *Almacenamiento de ONTAP*. Los detalles de *Almacenamiento* y *NFS* aparecen en el panel derecho.
++
+** La página de detalles de almacenamiento contiene información acerca de back-ends de almacenamiento, el agregado y el volumen.
+** La página de detalles de NFS contiene datos relacionados con el almacén de datos NFS.
+
+
+
+
+
+
+== Vistas de almacenamiento ONTAP para almacenes de datos VMFS
+
+.Pasos
+. Desde vSphere Client, desplácese hasta el almacén de datos de VMFS.
+. Haga clic en la pestaña *Configure* en el panel derecho.
+. Selecciona *Herramientas de NetApp ONTAP* > *Almacenamiento de ONTAP*. Los detalles de *Almacenamiento* y *Detalles de la LUN* o *Detalles del espacio de nombres* en el caso del protocolo NVMe/TCP o NVMe/FC aparecen en el panel derecho.
++
+** La página de detalles de almacenamiento contiene información acerca de back-ends de almacenamiento, el agregado y el volumen.
+** La página de detalles de LUN contiene datos relacionados con el LUN.
+** Cuando se utiliza el protocolo NVMe/TCP o NVMe/FC para almacén de datos VMFS, la página de detalles Namespace contiene datos relacionados con Namespace.
+
+
+
+
+
+
+== Vistas de almacenamiento ONTAP para almacenes de datos vVols
+
+.Pasos
+. Desde vSphere Client, desplácese hasta el almacén de datos vVols.
+. Haga clic en la pestaña *Configure* en el panel derecho.
+. Selecciona *Herramientas de NetApp ONTAP* > *Almacenamiento de ONTAP*.
+. La vista de almacenamiento de ONTAP enumera todos los volúmenes. Puede ampliar o quitar el almacenamiento desde el panel de almacenamiento de ONTAP.
++
+Siga las instrucciones de link:../manage/expand-storage-of-vvol-datastore.html["Expanda vVols Datastore"] la sección para añadir el almacén de datos vVols y link:../manage/remove-storage-from-a-vvols-datastore.html["Reducir el almacén de datos vVols"] la sección para eliminar el almacén de datos.
+
+

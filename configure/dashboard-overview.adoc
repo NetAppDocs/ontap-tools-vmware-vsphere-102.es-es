@@ -1,0 +1,39 @@
+---
+permalink: configure/dashboard-overview.html 
+sidebar: sidebar 
+keywords: user roles 
+summary: Cuando se selecciona el icono del plugin de las herramientas de NetApp ONTAP para VMware vSphere en la sección de accesos directos del cliente de vCenter, la interfaz de usuario navega a la página de información general. Esta página actúa como la consola que ofrece el resumen de las herramientas de ONTAP para el plugin de VMware vSphere. 
+---
+= Información general sobre la consola del plugin de las herramientas de NetApp ONTAP para VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cuando se selecciona el icono del plugin de las herramientas de NetApp ONTAP para VMware vSphere en la sección de accesos directos del cliente de vCenter, la interfaz de usuario navega a la página de información general. Esta página actúa como la consola que ofrece el resumen de las herramientas de ONTAP para el plugin de VMware vSphere.
+
+En el caso de la configuración de modo vinculado mejorado (ELM), aparece el menú desplegable SELECT de vCenter Server y puede seleccionar la instancia de vCenter Server que desee para ver los datos relevantes para él. Este menú desplegable está disponible para todas las demás vistas de lista del plugin. La selección de vCenter Server realizada en una página se mantiene en las pestañas del plugin. image:../media/remote-plugin-dashboard.png["Información general del panel de control"]
+
+La consola tiene varias tarjetas que muestran diferentes elementos del sistema. La siguiente tabla muestra las diferentes cartas y lo que representan.
+
+|===
+
+
+| *Nombre de la tarjeta* | *Descripción* 
+
+
+| Estado | La tarjeta de estado muestra el número de back-ends de almacenamiento añadido y el estado general de los back-ends de almacenamiento y el estado del proveedor de VASA de un vCenter. El estado de los back-ends de almacenamiento se muestra como «correcto» cuando todo el estado de los back-ends de almacenamiento es normal. El estado de los back-ends de almacenamiento se muestra como «incorrecto» si alguno de los back-ends de almacenamiento tiene un problema (estado Desconocido/Inaccesible/Degradado). Al hacer clic en el estado «En mal estado», se abre una sugerencia de herramienta con el estado de los back-ends de almacenamiento. Puede hacer clic en cualquier back-end de almacenamiento para obtener más información. El enlace Otros estados del proveedor de VASA (VP) muestra el estado actual del vicepresidente que se registró en vCenter Server. 
+
+
+| Back-ends de almacenamiento: Capacidad | Esta tarjeta muestra la capacidad agregada utilizada y disponible de todos los back-ends de almacenamiento para la instancia de vCenter Server seleccionada. 
+
+
+| Equipos virtuales | Esta tarjeta muestra las 10 máquinas virtuales principales ordenadas por métrica de rendimiento. Puede hacer clic en el encabezado para obtener las 10 máquinas virtuales principales de la métrica seleccionada ordenadas por orden ascendente o descendente. Los cambios de clasificación y filtrado realizados en la tarjeta persisten hasta que cambie o borre la caché del navegador. 
+
+
+| Almacenes de datos | Esta tarjeta muestra los 10 almacenes de datos principales ordenados por una métrica de rendimiento. Puede hacer clic en el encabezado para obtener los 10 almacenes de datos principales para la métrica seleccionada ordenados por orden ascendente o descendente. Los cambios de clasificación y filtrado realizados en la tarjeta persisten hasta que cambie o borre la caché del navegador. Hay una lista desplegable de tipo de almacén de datos para seleccionar el tipo de almacenes de datos: NFS, VMFS o vVols. 
+
+
+| Tarjeta de cumplimiento de normativas del host ESXi | Esta tarjeta muestra el estado de cumplimiento general de todos los hosts ESXi (para la configuración de vCenter seleccionada) con respecto a la configuración de host NetApp recomendada por grupo de ajustes/categoría. Puede hacer clic en el enlace Aplicar configuración recomendada para aplicar la configuración recomendada. Puede hacer clic en Problemas/desconocidos para ver la lista de hosts. 
+|===

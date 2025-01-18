@@ -1,0 +1,34 @@
+---
+permalink: configure/configure-esx-server-multipath-and-timeout-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: Las herramientas de ONTAP para VMware vSphere comprueba y establece los ajustes multivía del host ESXi y los ajustes de tiempo de espera de HBA que funcionan mejor con los sistemas de almacenamiento de NetApp. 
+---
+= Configure los ajustes de multivía y tiempo de espera del servidor ESXi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las herramientas de ONTAP para VMware vSphere comprueban y establecen la configuración de multivía del host ESXi y el tiempo de espera de HBA que funcionan mejor con los sistemas de almacenamiento de NetApp.
+
+*Acerca de esta tarea*
+
+Este proceso puede llevar mucho tiempo, según la configuración y la carga del sistema. El progreso de la tarea se muestra en el panel Recent Tasks. Cuando se completan las tareas, el icono de alerta de estado del host se sustituye por el icono normal o el icono de reinicio pendiente.
+
+* Pasos*
+
+. En la página de inicio de VMware vSphere Web Client, haga clic en *Hosts and Clusters*.
+. Haga clic con el botón derecho en un host y seleccione *Herramientas de NetApp ONTAP* > *Actualizar datos de host*.
+. En la página de accesos directos, haga clic en *NetApp ONTAP tools* en la sección de plugins.
+. Vaya a la tarjeta de cumplimiento de normativas del host ESXi en la descripción general (consola) de las herramientas de ONTAP para el plugin de VMware vSphere.
+. Selecciona *Aplicar ajustes recomendados* link.
+. En la ventana *Aplicar configuración de host recomendada*, seleccione los hosts que desea cumplir con la configuración de host recomendada por NetApp y haga clic en *Siguiente*.
++
+
+NOTE: Puede expandir el host ESXi para ver los valores actuales.
+
+. En la página settings, seleccione los valores recomendados según sea necesario.
+. En el panel de resumen, compruebe los valores y haga clic en * Finalizar *. Puede realizar un seguimiento del progreso en el panel de tareas recientes.
+

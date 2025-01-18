@@ -1,0 +1,89 @@
+---
+permalink: concepts/vcenter-server-role-based-access-control-features.html 
+sidebar: sidebar 
+keywords:  
+summary: 'VCenter Server proporciona un control de acceso basado en roles (RBAC) que permite controlar el acceso a los objetos de vSphere.' 
+---
+= Información general del control de acceso basado en roles en herramientas de ONTAP para VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VCenter Server proporciona control de acceso basado en roles (RBAC) que le permite controlar el acceso a objetos de vSphere. VCenter Server proporciona servicios de autenticación y autorización centralizados en muchos niveles diferentes de su inventario, utilizando derechos de usuario y grupo con roles y Privileges. VCenter Server cuenta con cinco componentes principales para la gestión de RBAC:
+
+|===
+
+
+| Componentes | Descripción 
+
+
+| Privilegios | Un privilegio habilita o deniega el acceso para realizar acciones en vSphere. 
+
+
+| Funciones | Un rol contiene uno o más privilegios del sistema donde cada privilegio define un derecho administrativo para un determinado objeto o tipo de objeto del sistema. Al asignar un rol a un usuario, el usuario hereda las capacidades de los privilegios definidos en ese rol. 
+
+
+| Usuarios y grupos | Los usuarios y los grupos se usan en permisos para asignar roles desde Active Directory (AD). VCenter Server tiene sus propios usuarios y grupos locales que se pueden utilizar. 
+
+
+| Permisos | Los permisos permiten asignar Privileges a usuarios o grupos para realizar ciertas acciones y realizar cambios en objetos dentro de vCenter Server. Los permisos de vCenter Server afectan únicamente a los usuarios que inician sesión en vCenter Server en lugar de a los usuarios que inician sesión en un host ESXi directamente. 
+
+
+| Objeto | Una entidad sobre la que se realizan las acciones. Los objetos de VMware vCenter son centros de datos, carpetas, pools de recursos, clústeres, hosts, y máquinas virtuales 
+|===
+Para completar correctamente una tarea, debe tener los roles de RBAC de vCenter Server apropiados. Durante una tarea, las herramientas de ONTAP para VMware vSphere comprueban los roles de vCenter Server de un usuario antes de comprobar los privilegios de ONTAP del usuario.
+
+
+NOTE: Los roles de vCenter Server se aplican a las herramientas de ONTAP para usuarios de VMware vSphere vCenter, no a los administradores. De forma predeterminada, los administradores tienen acceso completo al producto y no requieren roles asignados a ellos.
+
+Los usuarios y los grupos obtienen acceso a un rol formando parte de un rol de vCenter Server.
+
+
+
+== Puntos clave sobre la asignación y modificación de roles para vCenter Server
+
+Solo debe configurar roles de vCenter Server si desea limitar el acceso a objetos y tareas de vSphere. De lo contrario, puede iniciar sesión como administrador. Este inicio de sesión permite acceder automáticamente a todos los objetos de vSphere.
+
+Cuando se asigna un rol, determina las herramientas de ONTAP para las tareas de VMware vSphere que puede realizar un usuario. Puede modificar un rol en cualquier momento. Si cambia los privilegios dentro de un rol, el usuario asociado a ese rol debe cerrar la sesión y, a continuación, volver a iniciar sesión para activar el rol actualizado.
+
+
+
+== Roles estándar incluidos con las herramientas de ONTAP para VMware vSphere
+
+Para simplificar el uso de privilegios de vCenter Server y el control de acceso basado en roles, las herramientas de ONTAP para VMware vSphere proporcionan herramientas estándar de ONTAP para roles de VMware vSphere que permiten realizar herramientas de ONTAP clave para tareas de VMware vSphere. También hay un rol de solo lectura que permite ver la información, pero no ejecutar tareas.
+
+Puede ver las herramientas de ONTAP para las funciones estándar de VMware vSphere haciendo clic en *Roles* en la página inicial de vSphere Client. Los roles que las herramientas de ONTAP para VMware vSphere proporcionan le permiten realizar las siguientes tareas:
+
+|===
+
+
+| *Rol* | *Descripción* 
+
+
+| Herramientas de NetApp ONTAP para administrador de VMware vSphere | Ofrece todos los privilegios nativos de vCenter Server y los privilegios específicos de las herramientas de ONTAP que se requieren para ejecutar algunas de las herramientas de ONTAP para tareas de VMware vSphere. 
+
+
+| Herramientas de NetApp ONTAP para VMware vSphere Read Only | Ofrece acceso de solo lectura a herramientas de ONTAP. Estos usuarios no pueden ejecutar ninguna herramienta ONTAP para acciones de VMware vSphere controladas por acceso. 
+
+
+| Herramientas de NetApp ONTAP para el aprovisionamiento de VMware vSphere  a| 
+Ofrece algunos privilegios nativos de vCenter Server y privilegios específicos de las herramientas de ONTAP que se requieren para aprovisionar el almacenamiento. Es posible realizar las siguientes tareas:
+
+* Crear nuevos almacenes de datos
+* Gestionar almacenes de datos
+
+
+|===
+La función de administrador de ONTAP tools no está registrada en vCenter Server. Esta función es específica del Administrador de herramientas de ONTAP.
+
+Si su empresa requiere la implantación de funciones más restrictivas que las herramientas estándar de ONTAP para funciones de VMware vSphere, puede utilizar las herramientas de ONTAP para funciones de VMware vSphere para crear nuevas funciones.
+
+En este caso, debe clonar las herramientas de ONTAP necesarias para los roles de VMware vSphere y, a continuación, editar el rol clonado para que solo tenga los privilegios que necesite el usuario.
+
+
+
+== Permisos para back-ends de almacenamiento de ONTAP y objetos de vSphere
+
+Si el permiso de vCenter Server es suficiente, las herramientas de ONTAP para VMware vSphere comprueban los privilegios de control de acceso basado en roles de ONTAP (el rol de ONTAP) asociados con las credenciales de back-ends de almacenamiento (el nombre de usuario y la contraseña). para determinar si tiene suficientes privilegios para realizar las operaciones de almacenamiento que requieren las herramientas de ONTAP para la tarea de VMware vSphere en ese back-end de almacenamiento. Si dispone del ONTAP Privileges correcto, puede acceder a los back-ends de almacenamiento y ejecutar las herramientas de ONTAP para las tareas de VMware vSphere. Los roles ONTAP determinan las herramientas de ONTAP para tareas de VMware vSphere que se pueden realizar en el back-end del almacenamiento.

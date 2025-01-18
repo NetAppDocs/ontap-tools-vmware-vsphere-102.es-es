@@ -1,0 +1,79 @@
+---
+permalink: upgrade/upgrade-ontap-tools.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: La actualización es compatible con puestas en marcha tanto de alta disponibilidad como con otras de alta disponibilidad. 
+---
+= Actualice desde ONTAP tools para VMware vSphere 10.x a 10,2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La actualización es compatible con puestas en marcha tanto de alta disponibilidad como con otras de alta disponibilidad.
+
+
+NOTE: Para actualizar de las herramientas de ONTAP para VMware vSphere 10,0 a la versión 10,2, primero es necesario actualizar a las herramientas de ONTAP para VMware vSphere 10,1 y, a continuación, a la versión 10,2.
+
+*Antes de empezar*
+
+Si va a actualizar desde las herramientas de ONTAP para VMware vSphere 10,0 a 10,1, debe completar los siguientes pasos antes de continuar con la tarea de actualización:
+
+*Habilitar diagnósticos*
+
+. En vCenter Server, abra una consola a las herramientas de ONTAP.
+. Inicie sesión como el usuario de mantenimiento.
+. Ingrese *4* para seleccionar Soporte y Diagnóstico.
+. Ingrese *2* para seleccionar Habilitar acceso a diagnóstico remoto.
+. Introduce *y* para establecer la contraseña de tu elección.
+. Inicie sesión en la dirección IP de la máquina virtual desde el terminal/putty con el usuario como 'diag' y la contraseña que se estableció en el paso anterior.
+
+
+*Toma copia de seguridad de MongoDB*
+
+Ejecute los siguientes comandos para realizar un backup de MongoDB:
+
+* kn exec -it ntv-mongodb-0 sh - kn es un alias de kubectl -n ntv-system.
+* env | grep MONGODB_ROOT_PASSWORD - Ejecute este comando dentro del pod.
+* 'exit': realice esta acción para salir del pod.
+* kn exec ntv-mongodb-0 --mongodump -u root -p MONGODB_ROOT_PASSWORD --archive=/tmp/mongodb-backup.gz --gzip --gzip - ejecute este comando para reemplazar MONGO_ROOT_PASSWORD definido desde el comando anterior.
+* kn cp ntv-mongodb-0:/tmp/mongodb-backup.gz ./mongodb-backup.gz - ejecute este comando para copiar la copia de seguridad de mongodb creada usando el comando anterior de pod a host.
+
+
+*Tome la instantánea de todos los volúmenes*
+
+* Ejecute el comando 'kn get pvc' y guarde la salida del comando.
+* Tome Snapshot de todos los volúmenes una a una mediante uno de los siguientes métodos:
++
+** En la interfaz de línea de comandos, ejecute el comando _volume snapshot create -vserver <vserver_name> -volume <volume_name> -snapshot <snapshot_name>_
+** Desde la interfaz de usuario del administrador del sistema de ONTAP busque el volumen por su nombre en la barra de búsqueda y luego abra ese volumen haciendo clic en el nombre. Vaya a snapshot y añada la snapshot de ese volumen.
+
+
+
+
+* Tome la instantánea de las herramientas de ONTAP para las máquinas virtuales VMware vSphere en vCenter (3VMs en caso de implementación de alta disponibilidad, 1 VM en caso de implementación no de alta disponibilidad)*
+
+* En la interfaz de usuario del cliente de vSphere, seleccione la máquina virtual.
+* Vaya a la pestaña Instantáneas y haga clic en el botón *Tomar Instantánea*.
+
+
+Desde el paquete de registro, elimine los pods completados con el prefijo “generate-support-bundle-job” antes de realizar la actualización. Si la generación de paquetes de soporte está en curso, espere a que finalice y elimine el pod.
+
+* Pasos*
+
+. Cargue ISO de las herramientas de ONTAP para la actualización de VMware vSphere a la biblioteca de contenido.
+. En la página principal de VM, seleccione *Acciones* > *Editar configuración*
+. En la ventana de configuración de edición en el campo *Unidad de CD/DVD*, seleccione Archivo ISO de biblioteca de contenido.
+. Seleccione el archivo ISO y haga clic en *OK*. Seleccione la casilla de verificación Conectado en el campo *Unidad de CD/DVD*. image:../media/primaryvm-edit-settings.png["Editar configuración"]
+. En vCenter Server, abra una consola a las herramientas de ONTAP.
+. Inicie sesión como el usuario de mantenimiento.
+. Ingrese *3* para seleccionar el menú Configuración del sistema.
+. Ingrese *7* para seleccionar la opción de actualización.
+. Al actualizar, las siguientes acciones se realizan automáticamente:
++
+.. Actualización de certificados
+.. Actualización remota de plugin
+
+
+

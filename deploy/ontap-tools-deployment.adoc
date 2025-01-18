@@ -1,0 +1,159 @@
+---
+permalink: deploy/ontap-tools-deployment.html 
+sidebar: sidebar 
+keywords:  
+summary: Se puede configurar un solo nodo que no sea de alta disponibilidad en configuraciones pequeñas o medianas. 
+---
+= Ponga en marcha herramientas de ONTAP para VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es posible implementar herramientas de ONTAP para VMware vSphere en dos configuraciones:
+
+* Configuración de nodo único sin alta disponibilidad
+* Configuración de HA
+
+
+[role="tabbed-block"]
+====
+.Configuración de nodo único sin alta disponibilidad
+--
+Se puede poner en marcha una configuración sin nodo de alta disponibilidad en una configuración pequeña o mediana.
+
+* La configuración pequeña que no es de alta disponibilidad contiene 8 CPU y 16 GB de RAM.
+* La configuración media sin alta disponibilidad contiene 12 CPU y 24 GB de RAM.
+
+
+*Antes de empezar*
+
+Asegúrese de que la ruta de red esté presente. La red de datos de almacenamiento debe ser accesible desde la red de gestión de equipos virtuales. Por ejemplo, inicie sesión en ONTAP > ejecute el comando _network route create -vserver <SVM> -destination 0,0.0.0/0 -gateway <gateway_ip>_
+
+* Pasos*
+
+. Descargue el `.zip` archivo que contiene archivos binarios (_.ova_) y certificados firmados para herramientas de ONTAP para VMware vSphere desde el https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sitio de soporte de NetApp"^].
+. Inicie sesión en vSphere Server.
+. Desplácese hasta el pool de recursos que haya creado o hasta el clúster o hasta el host donde desea implementar el OVA.
+. Haga clic con el botón derecho en la ubicación requerida y seleccione *Implementar plantilla OVF...*.
++
+
+NOTE: No implemente herramientas de ONTAP para máquinas virtuales VMware vSphere en un almacén de datos vVols que gestiona.
+
+. Seleccione el archivo OVA a través de la URL del archivo _.ova_ o vaya a la carpeta donde se guarda el archivo _.ova_ y, a continuación, haga clic en *Siguiente*.
+. Seleccione un recurso informático y haga clic en *Siguiente*.
+. Revise los detalles de la plantilla y haga clic en *Siguiente*.
+. Lea y acepte el contrato de licencia.
+. Seleccione la configuración de implementación y haga clic en *Siguiente*.
++
+Las opciones de implementación avanzada utilizan Trident como aprovisionador de almacenamiento dinámico para ONTAP para crear volúmenes y la sencilla puesta en marcha utiliza almacenamiento local para crear volúmenes.
+
+. Seleccione el almacenamiento para la configuración y los archivos de disco y haga clic en *Siguiente*.
+. Seleccione la red de destino para cada red de origen y haga clic en *Siguiente*.
+. En la plantilla *Personalizar*, ingresa los detalles requeridos y haz clic en *Siguiente*
++
+** Cuando el ámbito de SVM está habilitado, debe haber habilitado la compatibilidad de SVM con la dirección IP de gestión.
+** La información proporcionada aquí se valida para los patrones adecuados durante el proceso de instalación. En caso de discrepancia, se muestra un mensaje de error en la consola web y se le solicita que corrija cualquier información incorrecta proporcionada.
+** Los nombres de host deben consistir en letras mayúsculas (A-Z), letras minúsculas (a-z), dígitos (0-9) o el guión (-) carácter especial. Si desea configurar la pila doble, especifique el nombre de host asignado a la dirección IPv6.
++
+
+NOTE: No se admite Pure IPv6. El modo mixto es compatible con una VLAN que tenga direcciones IPv6 e IPv4.
+
+
+
+. Revise los detalles en la ventana *Listo para completar*, seleccione *Finalizar*.
++
+A medida que se crea la tarea de implementación, el progreso se muestra en la barra de tareas de vSphere.
+
+. Encienda la máquina virtual después de completar la tarea.
+
+
+--
+.Configuración de HA
+--
+Puede configurar tres nodos de alta disponibilidad en configuraciones pequeñas, medianas o grandes. La IMPLEMENTACIÓN de ALTA DISPONIBILIDAD usa Trident para almacenar los datos de servicios.
+
+* Tres nodos pequeños de alta disponibilidad contienen 8 CPU y 16 GB de RAM por nodo.
+* Tres nodos de alta disponibilidad media contienen 12 CPU y 24 GB de RAM por nodo.
+* Tres nodos de alta disponibilidad grandes contienen 16 CPU y 32 GB de RAM por nodo.
+
+
+*Antes de empezar*
+
+Esta tarea le da instrucciones sobre cómo instalar tres nodos HA en configuraciones pequeñas, medianas o altas.
+
+La creación de la biblioteca de contenido es un paso previo obligatorio para implementar la configuración de tres nodos de alta disponibilidad. Una biblioteca de contenido en VMware es un objeto contenedor que almacena plantillas de máquinas virtuales, plantillas de vApp y otros tipos de archivos. La implementación con biblioteca de contenido le proporciona una experiencia perfecta, ya que no depende de la conectividad de red.
+
+
+NOTE: Debe almacenar la biblioteca de contenido en un almacén de datos compartido, de modo que todos los hosts de un clúster puedan acceder a él. Debe crear una biblioteca de contenido para almacenar el OVA antes de implementar el OVA en la configuración HA.
+
+
+NOTE: La plantilla de biblioteca de contenido una vez cargada no se debe suprimir después de la implementación, ya que se utilizará durante los reinicios.
+
+Cree la biblioteca de contenido mediante los siguientes pasos:
+
+. Descargue el `.zip` archivo que contiene archivos binarios (_.ova_) y certificados firmados para herramientas de ONTAP para VMware vSphere desde el https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sitio de soporte de NetApp"^].
+. Inicie sesión en el cliente de vSphere mediante `\https://vcenterip/ui`
+. Seleccione las elipses horizontales junto al cliente vSphere y seleccione *Biblioteca de contenido*.
+. Selecciona *Crear* a la derecha de la página.
+. Proporcione un nombre para la biblioteca y cree la biblioteca de contenido.
+. Navegue a la biblioteca de contenido que ha creado.
+. Seleccione *Acciones* a la derecha de la página y seleccione *Importar elemento* e importe el archivo OVA.
+
+
+
+NOTE: Para obtener más información, consulte https://blogs.vmware.com/vsphere/2020/01/creating-and-using-content-library.html["Creación y Uso de la Biblioteca de Contenido"] el blog.
+
+Asegúrese de haber importado el OVA a la biblioteca de contenido. Mantenga a mano el nombre de la biblioteca de contenido y el nombre del elemento de la biblioteca que ha proporcionado al elemento OVA.
+
+
+NOTE: Antes de continuar con el despliegue, establezca el planificador de recursos distribuidos (DRS) del cluster en el inventario en 'Conservador' durante la instalación de las herramientas de ONTAP. Esto garantiza que los equipos virtuales no se migren durante la instalación.
+
+* Pasos*
+
+. Descargue el `.zip` archivo que contiene archivos binarios (_.ova_) y certificados firmados para herramientas de ONTAP para VMware vSphere desde el https://mysupport.netapp.com/site/products/all/details/otv/downloads-tab["Sitio de soporte de NetApp"^].
+. Inicie sesión en vSphere Server.
+. Desplácese hasta el pool de recursos que haya creado o hasta el clúster o hasta el host donde desea implementar el OVA.
+. Haga clic con el botón derecho en la ubicación requerida y seleccione *Implementar plantilla OVF...*.
++
+
+NOTE: No implemente herramientas de ONTAP para máquinas virtuales VMware vSphere en un almacén de datos vVols que gestiona.
+
+. Seleccione el archivo OVA a través de la URL del archivo _.ova_ o vaya a la carpeta donde se guarda el archivo _.ova_ y, a continuación, haga clic en *Siguiente*.
+. Para implementar herramientas de ONTAP para VMware vSphere desde la biblioteca de contenido:
++
+.. Vaya a la biblioteca de contenidos y haga clic en el elemento de biblioteca que desea desplegar.
+.. Haga clic en *Acciones* > *Nueva VM desde esta plantilla*
+
+
+. Seleccione un recurso informático y haga clic en *Siguiente*.
+. Revise los detalles de la plantilla y haga clic en *Siguiente*.
+. Lea y acepte el contrato de licencia y haga clic en *Siguiente*.
+. Seleccione la configuración de implementación y haga clic en *Siguiente*.
+. Seleccione el almacenamiento para la configuración y los archivos de disco y haga clic en *Siguiente*.
+. Seleccione la red de destino para cada red de origen y haga clic en *Siguiente*.
+. En la ventana *Personalizar plantilla*, rellena los campos requeridos y haz clic en *Siguiente*.
++
+** En el modo HA de puesta en marcha, no cambie el nombre de las máquinas virtuales después de la puesta en marcha.
+** Cuando el ámbito de SVM está habilitado, debe haber habilitado la compatibilidad de SVM con la dirección IP de gestión.
+** La información proporcionada aquí se valida para los patrones adecuados durante el proceso de instalación. En caso de discrepancia, se muestra un mensaje de error en la consola web y se le solicita que corrija cualquier información incorrecta proporcionada.
+** Los nombres de host deben consistir en letras mayúsculas (A-Z), letras minúsculas (a-z), dígitos (0-9) o el guión (-) carácter especial. Si desea configurar la pila doble, especifique el nombre de host asignado a la dirección IPv6.
++
+
+NOTE: No se admite Pure IPv6. El modo mixto es compatible con una VLAN que tenga direcciones IPv6 e IPv4.
+
+
+
+. Revise los detalles en la ventana *Listo para completar*, seleccione *Finalizar*.
++
+A medida que se crea la tarea de implementación, el progreso se muestra en la barra de tareas de vSphere.
+
+. Encienda la máquina virtual después de completar la tarea.
+
+
+--
+====
+Puede realizar un seguimiento del progreso de la instalación dentro de la consola web de la máquina virtual.
+
+En caso de discrepancias en los valores introducidos en el formulario OVF, un cuadro de diálogo le pedirá que realice una acción correctiva. Realice los cambios necesarios en el cuadro de diálogo, utilizando el botón Tab para navegar y seleccionar OK. Tiene tres intentos para rectificar cualquier problema. Si el problema persiste después de tres intentos, el proceso de instalación cesará y se recomienda volver a intentar la instalación en una máquina virtual nueva.

@@ -1,0 +1,28 @@
+---
+permalink: manage/igroup-management.html 
+sidebar: sidebar 
+keywords:  
+summary: En ONTAP, las políticas de exportación se utilizan para proporcionar acceso de la ruta de datos de volúmenes a hosts y iGroups para proporcionar acceso de la ruta de datos de LUN a hosts ESXi. 
+---
+= Gestione iGroups y políticas de exportación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En ONTAP, las políticas de exportación se utilizan para proporcionar acceso de ruta de datos de volumen a los hosts y los iGroups se utilizan para proporcionar acceso de la ruta de datos de número de unidad lógica (LUN) a los hosts ESXi. Las herramientas de ONTAP para VMware vSphere hacen que la creación de igroups sea fácil e intuitiva, y proporcionan flujos de trabajo integrales muy enriquecidos. Para garantizar la consistencia, no se admite la creación directa de iGroups en plataformas de almacenamiento.
+
+Cuando se crean almacenes de datos de volúmenes virtuales o se montan en hosts en vCenter Server, los hosts deben tener acceso a volúmenes (NFS) o LUN (iSCSI) según el tipo de protocolo del almacén de datos.
+
+La política de exportación es dinámica y la nueva política de exportación se crea con el formato de nomenclatura de trident-uuid. En el Administrador del sistema de ONTAP, vaya a *Almacenamiento* > *VM de almacenamiento* > *[nombre de VM de almacenamiento]* > *Configuración* > *Políticas de exportación* para ver la política de exportación.
+
+Los grupos de iniciadores y las políticas de exportación de las herramientas de ONTAP para VMware vSphere se gestionan de forma eficiente y proporcionan las siguientes ventajas:
+
+* Admite políticas de exportación y iGroups migrados.
+* Sin interrupciones en las operaciones de entrada y salida de máquinas virtuales.
+* Admite el montaje en hosts adicionales sin intervención manual.
+* Minimiza la necesidad de gestionar el número de iGroups y políticas de exportación.
+* Un recopilador de basura elimina automáticamente todos los iGroups gestionados no utilizados y las políticas de exportación periódicamente.
+* Si un almacén de datos se aprovisiona en el nivel del clúster de hosts, se crea con todos los iniciadores de host del clúster de hosts que se añaden al igroup.
+

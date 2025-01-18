@@ -1,0 +1,50 @@
+---
+permalink: release-notes/whats-new-otv-102.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, otv, 10.2, ONTAP tools for VMware vSphere' 
+summary: Descubra las nuevas funcionalidades disponibles en las herramientas de ONTAP para VMware vSphere 10,2. 
+---
+= Novedades de las herramientas de ONTAP para VMware vSphere 10,2
+:allow-uri-read: 
+
+
+[role="lead"]
+Descubra las nuevas funcionalidades disponibles en las herramientas de ONTAP para VMware vSphere 10,2.
+
+[cols="30%,70%"]
+|===
+| Actualizar | Descripción 
+
+
+ a| 
+xref:../manage/storage-view-datastore.html#ontap-storage-views-for-nfs-datastores[Compatibilidad con el protocolo NVMe]
+ a| 
+Las herramientas de ONTAP para VMware vSphere 10,2 admiten los protocolos NVMe/FC y NVMe/TCP para aprovisionar almacenes de datos VMFS. Los flujos de trabajo integrados sin problemas en la interfaz de vCenter facilitan el aprovisionamiento de almacenes de datos. Las ventajas de usar los protocolos NVMe/FC y NVMe/TCP para aprovisionar almacenes de datos VMFS incluyen un rendimiento optimizado, una escalabilidad masiva y un manejo eficiente de múltiples solicitudes de datos, reducciones significativas de latencia y una gestión de recursos eficiente. El I/O del almacenamiento basado en NVMe tiene una utilización de CPU de hasta un 50 % inferior en comparación con los protocolos de datos anteriores.
+
+
+
+ a| 
+xref:../configure/create-vvols-datastore.html[Compatibilidad con el protocolo Fibre Channel (FC)]
+ a| 
+Las herramientas de ONTAP para VMware vSphere 10,2 admiten el protocolo FC para aprovisionar almacenes de datos vVols y VMFS. Entre las ventajas de la compatibilidad con el protocolo FC se incluyen un alto rendimiento, fiabilidad y estabilidad, escalabilidad, mayor seguridad y una gestión eficiente de los recursos.
+
+
+
+ a| 
+xref:../configure/protect-cluster.html[SnapMirror síncrono activo]
+ a| 
+El soporte de sincronización activa de SnapMirror con herramientas de ONTAP para VMware vSphere 10,2 incluye la nueva funcionalidad de clúster de protección que proporciona un flujo de trabajo de configuración integral para crear una instancia de vSphere Metro Storage en la interfaz de usuario de vCenter. Esto permite configuraciones de clúster ampliadas en las que los servicios empresariales siguen funcionando incluso si se produce un fallo completo del sitio, lo que admite la conmutación por error de forma transparente mediante una copia secundaria.
+
+[NOTE]
+====
+El asistente SnapMirror puede configurar el modo asíncrono y síncrono de SnapMirror además de la sincronización activa de SnapMirror.
+
+====
+
+
+ a| 
+xref:../protect/enable-storage-replication-adapter.html[Mejoras del adaptador de replicación de almacenamiento (SRA)]
+ a| 
+El SRA implementa la solución de recuperación ante desastres (DR) basada en la especificación de VMware Site Recovery Manager (SRM). La sincronización activa de SnapMirror a través de la integración de SRM ofrece soporte para la solución de planificación y coordinación de la recuperación ante desastres para proporcionar recuperación tras fallos transparente de aplicaciones.
+
+|===

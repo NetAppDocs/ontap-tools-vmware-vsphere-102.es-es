@@ -1,0 +1,146 @@
+---
+permalink: upgrade/upgrade-error-codes.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: En esta página, se describen los códigos de error para la operación de actualización de las herramientas de ONTAP para el sistema VMware vSphere. 
+---
+= Actualizar códigos de error
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es posible que encuentre códigos de error durante la operación de actualización de VMware vSphere en las herramientas de ONTAP. Los códigos de error tienen una longitud de cinco dígitos, donde los dos primeros dígitos representan el script que encontró el problema, y los tres últimos dígitos representan el flujo de trabajo específico dentro de ese script.
+
+Todos los registros de errores se registran en el archivo ansible-perl-errors.log para facilitar el seguimiento y la resolución de los problemas. Este archivo de registro contiene el código de error y la tarea de Ansible con errores.
+
+
+NOTE: Los códigos de error proporcionados en esta página son sólo de referencia. Póngase en contacto con el equipo de soporte si el error persiste o si no se menciona ninguna solución.
+
+En la siguiente tabla se enumeran los códigos de error y los nombres de archivo correspondientes.
+
+|===
+
+
+| *Código de error* | *Nombre del script* 
+
+
+| 00 | firstboot-network-config.pl, despliegue del modo 
+
+
+| 01 | firstboot-network-config.pl, actualización del modo 
+
+
+| 02 | firstboot-inputs-validation.pl 
+
+
+| 03 | firstboot-deploy-otv-ng.pl, puesta en marcha, ha 
+
+
+| 04 | firstboot-deploy-otv-ng.pl tb, puesta en marcha, no ha 
+
+
+| 05 | firstboot-deploy-otv-ng.pl, reiniciar 
+
+
+| 06 | firstboot-deploy-otv-ng.pl, actualización, ha 
+
+
+| 07 | firstboot-deploy-otv-ng.pl, actualización, no ha 
+
+
+| 08 | firstboot-otv-recovery.pl 
+|===
+Los últimos tres dígitos del código de error indican el error de flujo de trabajo específico dentro del script:
+
+|===
+
+
+| *Código de error de actualización* | *Flujo de trabajo* | *Resolución* 
+
+
+| 063 | Se produjo un error en la copia de contenido en el volumen de recuperación | Realizar una recuperación basada en snapshot. 
+
+
+| 068 | Error al revertir los paquetes Debian | Realizar una recuperación basada en snapshot. 
+
+
+| 069 | No se pudieron restaurar los archivos | Realizar una recuperación basada en snapshot. 
+
+
+| 070 | Error al eliminar el backup | Realizar una recuperación basada en snapshot. 
+
+
+| 071 | El clúster de Kubernetes no estaba en buen estado | Realizar una recuperación basada en snapshot. 
+
+
+| 072 | El archivo CR no existe en el disco de la cárcel | Realizar una recuperación basada en snapshot. 
+
+
+| 073 | Se ha producido un error al aplicar el CR al definir el indicador de conciliación forzada en FALSE | Realizar una recuperación basada en snapshot. 
+
+
+| 074 | El montaje ISO ha fallado | Vuelva a intentar la actualización. 
+
+
+| 075 | Fallo en las comprobaciones previas de la actualización | Vuelva a intentar la actualización. 
+
+
+| 076 | Fallo al actualizar el registro | Realizar una recuperación basada en snapshot. 
+
+
+| 077 | Error al revertir el registro | Realizar una recuperación basada en snapshot. 
+
+
+| 078 | Fallo al actualizar el operador | Realizar una recuperación basada en snapshot. 
+
+
+| 079 | Fallo al revertir el operador | Realizar una recuperación basada en snapshot. 
+
+
+| 080 | Fallo al actualizar los servicios | Realizar una recuperación basada en snapshot. 
+
+
+| 081 | Error al revertir los servicios | Realizar una recuperación basada en snapshot. 
+
+
+| 082 | Error al eliminar las imágenes antiguas del contenedor | Realizar una recuperación basada en snapshot. 
+
+
+| 083 | Fallo al suprimir la copia de seguridad | Realizar una recuperación basada en snapshot. 
+
+
+| 084 | Fallo al volver a cambiar JobManager a producción | Realizar una recuperación basada en snapshot. 
+
+
+| 085 | Error al crear secretos de certificados de CA | Realizar una recuperación basada en snapshot. 
+
+
+| 086 | error al crear secretos de certificados de servidor/clave privada | Realizar una recuperación basada en snapshot. 
+
+
+| 087 | Error al completar los pasos de actualización de la versión 10,0 a la 10,1 | Fallo en los pasos posteriores a la actualización. 
+
+
+| 088 | Fallo al configurar la rotación de log para el diario | Vuelva a intentar la actualización. 
+
+
+| 089 | Fallo al cambiar la propiedad del archivo de configuración de rotación de registro de resumen | Vuelva a intentar la actualización. 
+
+
+| 091 | Se produjo un error en la actualización de iSCSI | Vuelva a intentar la actualización. 
+
+
+| 092 | Se produjo un error en la reversión de iSCSI | Vuelva a intentar la actualización. 
+
+
+| 093 | fallo en la actualización de Trident | Vuelva a intentar la actualización. 
+
+
+| 094 | se produjo un error en la reversión de Trident | Vuelva a intentar la actualización. 
+
+
+| 095 | Fallo en la actualización de Debian | No hay recuperación para la actualización debian. Los servicios se actualizan y se ejecutan nuevos pods 
+|===
+Más información acerca de https://kb.netapp.com/data-mgmt/OTV/VSC_Kbs/How_to_restore_ONTAP_tools_for_VMware_vSphere_if_upgrade_fails_from_version_10.0_to_10.1["Cómo restaurar las herramientas de ONTAP para VMware vSphere si la actualización falla de la versión 10,0 a 10,1"]

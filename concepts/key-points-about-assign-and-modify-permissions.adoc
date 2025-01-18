@@ -1,0 +1,45 @@
+---
+permalink: concepts/key-points-about-assign-and-modify-permissions.html 
+sidebar: sidebar 
+keywords:  
+summary: Hay varios puntos clave que se deben tener en cuenta cuando se trabaja con permisos de vCenter Server. Si una tarea de las herramientas de ONTAP para VMware vSphere se complete correctamente, puede depender de la ubicación en la que se haya asignado un permiso o de las acciones que haya realizado un usuario después de modificar un permiso. 
+---
+= Asigne y modifique permisos para vCenter Server
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Hay varios puntos clave que se deben tener en cuenta cuando se trabaja con permisos de vCenter Server. Si una tarea de las herramientas de ONTAP para VMware vSphere se complete correctamente, puede depender de la ubicación en la que se haya asignado un permiso o de las acciones que haya realizado un usuario después de modificar un permiso.
+
+
+
+== Asignación de permisos
+
+Solo debe configurar permisos de vCenter Server si desea limitar el acceso a los objetos y tareas de vSphere. De lo contrario, puede iniciar sesión como administrador. Este inicio de sesión permite acceder automáticamente a todos los objetos de vSphere.
+
+Donde se asigna un permiso determina las herramientas de ONTAP para las tareas de VMware vSphere que puede realizar un usuario.
+
+A veces, para garantizar la finalización de una tarea, debe asignar permiso a un nivel superior, como el objeto raíz. Es así cuando una tarea requiere un privilegio que no se aplica a un objeto de vSphere específico (por ejemplo, un seguimiento de la tarea) o cuando un privilegio requerido se aplica a un objeto que no es vSphere (por ejemplo, un sistema de almacenamiento).
+
+En estos casos, puede configurar un permiso para que sea heredado por las entidades secundarias. También puede asignar otros permisos a las entidades secundarias. El permiso asignado a una entidad hijo siempre anula el permiso heredado de la entidad padre. Esto significa que puede otorgar permisos a una entidad secundaria para restringir el ámbito de un permiso asignado a un objeto raíz y heredado por la entidad secundaria.
+
+
+TIP: A menos que las políticas de seguridad de la empresa requieran permisos más restrictivos, es recomendable asignar permisos al objeto raíz (también denominado carpeta raíz).
+
+
+
+== Permisos y objetos que no son de vSphere
+
+El permiso que cree se aplica a un objeto que no sea de vSphere. Por ejemplo, un sistema de almacenamiento no es un objeto de vSphere. Si un privilegio se aplica a un sistema de almacenamiento, debe asignar el permiso que incluye ese privilegio a las herramientas de ONTAP para el objeto raíz de VMware vSphere porque no existe ningún objeto de vSphere al que pueda asignarlo.
+
+Por ejemplo, cualquier permiso que incluya un privilegio, como ONTAP tools for VMware vSphere privilege «Añadir/modificar/omitir sistemas de almacenamiento», se debe asignar al nivel de objeto raíz.
+
+
+
+== Modificar permisos
+
+Puede modificar un permiso en cualquier momento.
+
+Si cambia los privilegios dentro de un permiso, el usuario asociado con ese permiso debe cerrar la sesión y, a continuación, volver a iniciar la sesión para habilitar el permiso actualizado.

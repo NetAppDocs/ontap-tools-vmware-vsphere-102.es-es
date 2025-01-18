@@ -1,0 +1,38 @@
+---
+permalink: protect/configure-protection-groups.html 
+sidebar: sidebar 
+keywords:  
+summary: Debe crear grupos de protección para proteger un grupo de máquinas virtuales en el sitio protegido. 
+---
+= Configure los grupos de protección
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe crear grupos de protección para proteger un grupo de máquinas virtuales en el sitio protegido.
+
+*Lo que necesitará*
+
+Debe asegurarse de que los sitios de origen y destino están configurados para lo siguiente:
+
+* Misma versión de VMware Live Site Recovery instalada
+* Equipos virtuales
+* Sitios protegidos y de recuperación emparejados
+* Los almacenes de datos de origen y destino deben montarse en las ubicaciones respectivas
+
+
+* Pasos*
+
+. Inicie sesión en vCenter Server y, a continuación, haga clic en *Site Recovery* > *Protection Groups*.
+. En el panel *grupos de protección*, haga clic en *Nuevo*.
+. Especifique un nombre y una descripción para el grupo de protección, la dirección y haga clic en *Siguiente*.
+. En el campo *Type*, seleccione la opción *Type field...* como grupos de Datastore (replicación basada en array) para el almacén de datos NFS y VMFS. El dominio de fallo no es más que SVM con replicación habilitada. Se muestran las SVM que solo tienen implementadas las relaciones entre iguales y no tienen problemas.
+. En la pestaña Grupos de replicación, seleccione el par de matrices habilitado o los grupos de replicación que tienen la máquina virtual configurada y, a continuación, haga clic en *Siguiente*.
++
+Todas las máquinas virtuales del grupo de replicación se agregan al grupo de protección.
+
+. Seleccione el plan de recuperación existente o cree un nuevo plan haciendo clic en *Agregar al nuevo plan de recuperación*.
+. En la ficha preparado para completar , revise los detalles del grupo de protección que creó y, a continuación, haga clic en *Finalizar*.
+

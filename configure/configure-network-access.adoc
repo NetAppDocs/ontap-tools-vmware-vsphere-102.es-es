@@ -1,0 +1,26 @@
+---
+permalink: configure/configure-network-access.html 
+sidebar: sidebar 
+keywords:  
+summary: Puede optar por permitir pocas direcciones de host ESXi específicas para la operación de montaje de almacenes de datos. 
+---
+= Configure el acceso a la red
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cuando tiene varias direcciones IP de host ESXi, de forma predeterminada, todas las direcciones IP detectadas desde el host se añaden a una política de exportación. Si no desea añadir todas las direcciones IP a una política de exportación, proporcione una configuración para permitir direcciones IP específicas en una lista, un rango o una lista separados por comas o CIDR, o una combinación de los tres para cada vCenter.
+
+Puede optar por permitir algunas direcciones de host ESXi específicas para la operación de montaje de almacenes de datos. Si no se proporciona la configuración, la política de exportación agrega todas las direcciones IP detectadas en el paso previo al montaje. Si se proporciona la configuración, las herramientas de ONTAP para VMware vSphere agregan únicamente las que se encuentran dentro del rango o las direcciones IP indicadas. Si ninguna de las direcciones IP de un host pertenece a las direcciones IP mostradas, el montaje en ese host falla.
+
+.Pasos
+. Inicie sesión en el cliente de vSphere mediante `\https://vcenterip/ui`
+. En la página de accesos directos, haga clic en *NetApp ONTAP tools* en la sección de plugins.
+. En el panel izquierdo de las herramientas de ONTAP, navegue hasta *Ajustes* > *Administrar acceso a la red* > *Editar*.
++
+Utilice una coma (,) para separar las direcciones IP. Puede especificar una dirección IP específica, o un rango de direcciones IP o direcciones IPv6.
+
+. Haga clic en *Guardar*.
+
