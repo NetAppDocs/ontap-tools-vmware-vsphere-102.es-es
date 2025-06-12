@@ -342,7 +342,6 @@
   <block id="7f2d9eb042fad8493c138993f867cd80" category="paragraph">La lista se actualizará y podrá ver el back-end de almacenamiento que acaba de añadir en la lista.</block>
   <block id="f6c30a782639c90ebe44f3f343922077" category="summary">Las instancias de vCenter Server son plataformas de gestión central que permiten controlar hosts, máquinas virtuales (VM) y back-ends de almacenamiento.</block>
   <block id="6245e46af5a3bdaf57696763c4214c70" category="doc">Añada instancias de vCenter Server</block>
-  <block id="9a22df67797f0968951385551d26d202" category="paragraph">VCenter Server proporciona la plataforma de gestión central que permite controlar hosts, máquinas virtuales (VM) y back-ends de almacenamiento.</block>
   <block id="aaf638e0edd71bac35fef1b1149f3843" category="paragraph">Puede añadir y gestionar varias instancias de vCenter Server con una instancia de herramientas de ONTAP para VMware vSphere.</block>
   <block id="0336e0a2e9f5b95c0d4178d3186ecbf6" category="list-text">Seleccione *vCenters* en la barra lateral.</block>
   <block id="4287076fd3b7cc772889cb75d012c773" category="list-text">Seleccione *Añadir* para incorporar las instancias de vCenter Server y proporcione la dirección IP/nombre de host de vCenter, el nombre de usuario, la contraseña y los detalles de puerto.</block>
@@ -676,7 +675,6 @@
   <block id="02ecc951ba9c7de4ba8def4213f1982e" category="list-text">Para ver los clústeres de hosts protegidos, navegue hasta *Herramientas de NetApp ONTAP* &gt; *Protección* &gt; *Relaciones de clúster de host*.</block>
   <block id="88cea8a228e76d96b5b014b926e19795" category="summary">Puede registrar y cancelar el registro del proveedor de VASA con una instancia de vCenter Server mediante las herramientas de ONTAP para la interfaz de plugin remoto de VMware vSphere.</block>
   <block id="062e7967273cea76dff9c3579a0c44db" category="doc">Registre el proveedor de VASA en una instancia de vCenter Server</block>
-  <block id="b59d64b98fd315f6b2bb4cfbeef9a7fd" category="paragraph">Puede registrar y cancelar el registro del proveedor de VASA con una instancia de vCenter Server mediante las herramientas de ONTAP para la interfaz de plugin remoto de VMware vSphere. La sección VASA Provider Settings muestra el estado de registro del proveedor de VASA para la instancia de vCenter Server seleccionada.</block>
   <block id="711a24c1ed1e14106df5e83af675d10f" category="list-text">Selecciona *Configuración* &gt; *Configuración del proveedor VASA*. El estado de registro del proveedor de VASA se muestra como No registrado.</block>
   <block id="7bd80420c7575554792093f90dbbe6ed" category="list-text">Haga clic en el botón *REGISTRAR* para registrar el proveedor VASA.</block>
   <block id="2a8034ce8dbfe14fabe94e3ca6c7b860" category="list-text">Introduzca un nombre para el proveedor VASA y proporcione las credenciales de usuario de la aplicación VMware vSphere Tools para las herramientas ONTAP y haga clic en *REGISTRAR*.</block>
@@ -1833,4 +1831,7 @@
   <block id="f66a3c183f0e736240b77f8b755c880e" category="list-text">Disk.QFullThreshold</block>
   <block id="19c08de7404551288e1274186e039ef4" category="list-text">Tiempos de espera de FC HBA de Emulex</block>
   <block id="d46cddda4da7ec11f17472d11df95b68" category="list-text">Tiempos de espera de HBA FC de QLogic</block>
+  <block id="a9a74d98e6d11230d876df92acb424fd" category="paragraph">Añada instancias de vCenter Server a herramientas de ONTAP para VMware vSphere para configurar, gestionar y proteger sus almacenes de datos virtuales en el entorno de vCenter Server. Cuando agrega varias instancias de vCenter Server, se requieren certificados de CA personalizados para una comunicación segura entre las herramientas de ONTAP y cada vCenter Server.</block>
+  <block id="56564ecb20e9cb45429b432b22f216f4" category="admonition">La configuración de MPIO no se aplica a los protocolos NVMe, NVMe/FC y NVMe/TCP.</block>
+  <block id="07c9ecda15aaf26d8eef3770025ec27c" category="paragraph">El proveedor de VASA se puede registrar con una instancia de vCenter Server mediante las herramientas de ONTAP para VMware vSphere. La sección VASA Provider settings muestra el estado de registro del proveedor de VASA para la instancia de vCenter Server seleccionada. En una implementación de varios vCenter, asegúrese de tener certificados CA personalizados para cada instancia de vCenter Server.</block>
 </blocks>
